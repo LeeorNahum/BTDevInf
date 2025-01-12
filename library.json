@@ -1,0 +1,21 @@
+{
+  "name": "BTDevInf",
+  "version": "1.0.0",
+  "description": "A Bluetooth Device Information Service implementation using NimBLE for ESP32.",
+  "keywords": ["BLE", "NimBLE", "Device Information Service", "ESP32", "Bluetooth"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeeorNahum/BTDevInf.git"
+  },
+  "authors": [
+    {
+      "name": "Leeor Nahum",
+      "email": "leeornahum@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "h2zero/NimBLE-Arduino": "^1.4.0"
+  },
+  "frameworks": "arduino",
+  "platforms": "*"
+} 
