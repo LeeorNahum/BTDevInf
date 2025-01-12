@@ -11,10 +11,6 @@ void setupDeviceInformation(NimBLEServer* server) {
   devInfo.setHardwareRevisionString("Rev A");
   devInfo.setSerialNumberString("SN0123456789");
   
-  // Optional: Set additional information
-  devInfo.setCountryCode(840); // USA
-  devInfo.setDateOfManufacture(DateUTC(2025, 1, 12));
-  
   // Start the service
   devInfo.startService();
 } 

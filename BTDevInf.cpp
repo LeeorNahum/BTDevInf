@@ -65,7 +65,7 @@ bool BTDevInf::setSystemID(const uint8_t* system_id, size_t length) {
     if (system_id_characteristic == nullptr) {
       system_id_characteristic = device_info_service->createCharacteristic(
         SYSTEM_ID_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ // | NIMBLE_PROPERTY::READ_AUTHEN
+        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
       );
       setupDescriptors(system_id_characteristic, "System ID", NimBLE2904::FORMAT_OPAQUE, 0, 0, 1, 0);
     }
@@ -115,7 +115,7 @@ bool BTDevInf::setSerialNumberString(const std::string& serial_number_string) {
     if (serial_number_string_characteristic == nullptr) {
       serial_number_string_characteristic = device_info_service->createCharacteristic(
         SERIAL_NUMBER_STRING_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ // | NIMBLE_PROPERTY::READ_AUTHEN
+        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
       );
       setupDescriptors(serial_number_string_characteristic, "Serial Number", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
     }
@@ -309,11 +309,12 @@ bool BTDevInf::setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t p
 /**
  * @brief Set UDI for Medical Devices
  * @param udi The Unique Device Identifier (UDI) as assigned to the medical device
+ * @param length Length of the data in octets
  * @return true if successful, false if service doesn't exist
  * @note The UDI for Medical Devices characteristic is a structure that contains the Unique Device Identifier (UDI) as assigned to the medical device. When the device has a label representing the UDI, the UDI for Medical Devices characteristic shall represent the same value.
  * @note The UDI of a personal medical device is seen as Protected Health Information.
  */
-bool BTDevInf::setUDIForMedicalDevices(const std::string& udi) {
+bool BTDevInf::setUDIForMedicalDevices(const uint8_t* udi, size_t length) {
   if (device_info_service == nullptr) return false;
   
   if (udi_for_medical_devices_characteristic == nullptr) {
@@ -321,13 +322,13 @@ bool BTDevInf::setUDIForMedicalDevices(const std::string& udi) {
     if (udi_for_medical_devices_characteristic == nullptr) {
       udi_for_medical_devices_characteristic = device_info_service->createCharacteristic(
         UDI_FOR_MEDICAL_DEVICES_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ // | NIMBLE_PROPERTY::READ_AUTHEN
+        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
       );
-      setupDescriptors(udi_for_medical_devices_characteristic, "UDI for Medical Devices", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(udi_for_medical_devices_characteristic, "UDI for Medical Devices", NimBLE2904::FORMAT_OPAQUE, 0, 0, 1, 0);
     }
   }
   
-  udi_for_medical_devices_characteristic->setValue(udi);
+  udi_for_medical_devices_characteristic->setValue(udi, length);
   
   return true;
 }

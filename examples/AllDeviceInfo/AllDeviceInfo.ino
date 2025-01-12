@@ -29,15 +29,16 @@ void setup() {
   devInfo.setIEEERegulatoryCertificationDataList(ieee_data, sizeof(ieee_data));
   
   // Set PnP ID
-  // vendor_id_source: 0x01 for Bluetooth SIG, 0x02 for USB IF
+  // vendor_id_source: 0x01 for Bluetooth SIG, 0x02 for USB Implementer's Forum
   // vendor_id: Company identifier
   // product_id: Vendor-assigned product ID
   // product_version: JJ.M.N format (0x0100 for 1.0.0)
-  devInfo.setPnPID(0x02, 0x0483, 0x5740, 0x0100);
+  devInfo.setPnPID(0x02, 0x303A, 0x1001, 0x0100);
   
   // Set UDI for Medical Devices (requires authentication to read)
   // Unique Device Identifier as assigned to medical devices
-  devInfo.setUDIForMedicalDevices("(01)12345678901234");
+  const char* udi = "(01)12345678901234";
+  devInfo.setUDIForMedicalDevices((const uint8_t*)udi, strlen(udi));
   
   // Start the service
   devInfo.startService();

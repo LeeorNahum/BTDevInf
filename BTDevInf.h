@@ -36,7 +36,7 @@ class BTDevInf {
     bool setManufacturerNameString(const std::string& manufacturer_name_string);
     bool setIEEERegulatoryCertificationDataList(const uint8_t* data, size_t length);
     bool setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t product_id, uint16_t product_version);
-    bool setUDIForMedicalDevices(const std::string& udi);
+    bool setUDIForMedicalDevices(const uint8_t* udi, size_t length);
     
     NimBLEService* getService() { return device_info_service; }
     
