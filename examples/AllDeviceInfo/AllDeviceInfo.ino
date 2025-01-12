@@ -13,8 +13,6 @@ void setup() {
   BTDevInf devInfo(NimBLEDevice::createServer());
   
   // Set System ID (requires authentication to read)
-  // First 5 bytes: Manufacturer-defined identifier
-  // Last 3 bytes: Organizationally Unique Identifier (OUI)
   uint8_t system_id[] = {0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0};
   devInfo.setSystemID(system_id, sizeof(system_id));
   

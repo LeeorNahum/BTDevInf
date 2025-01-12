@@ -65,7 +65,7 @@ bool BTDevInf::setSystemID(const uint8_t* system_id, size_t length) {
     if (system_id_characteristic == nullptr) {
       system_id_characteristic = device_info_service->createCharacteristic(
         SYSTEM_ID_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
+        NIMBLE_PROPERTY::READ // | NIMBLE_PROPERTY::READ_AUTHEN
       );
       setupDescriptors(system_id_characteristic, "System ID", NimBLE2904::FORMAT_OPAQUE, 0, 0, 1, 0);
     }
@@ -115,7 +115,7 @@ bool BTDevInf::setSerialNumberString(const std::string& serial_number_string) {
     if (serial_number_string_characteristic == nullptr) {
       serial_number_string_characteristic = device_info_service->createCharacteristic(
         SERIAL_NUMBER_STRING_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
+        NIMBLE_PROPERTY::READ // | NIMBLE_PROPERTY::READ_AUTHEN
       );
       setupDescriptors(serial_number_string_characteristic, "Serial Number", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
     }
@@ -321,7 +321,7 @@ bool BTDevInf::setUDIForMedicalDevices(const std::string& udi) {
     if (udi_for_medical_devices_characteristic == nullptr) {
       udi_for_medical_devices_characteristic = device_info_service->createCharacteristic(
         UDI_FOR_MEDICAL_DEVICES_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
+        NIMBLE_PROPERTY::READ // | NIMBLE_PROPERTY::READ_AUTHEN
       );
       setupDescriptors(udi_for_medical_devices_characteristic, "UDI for Medical Devices", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
     }
