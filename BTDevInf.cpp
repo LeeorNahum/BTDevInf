@@ -1,51 +1,6 @@
 #include "BTDevInf.h"
 
 /**
- * @brief Construct a DateUTC instance representing days since epoch (Jan 1, 1970)
- * @param year Year in UTC (e.g., 2025)
- * @param month Month in UTC (1-12)
- * @param day Day in UTC (1-31)
- * @return Days since epoch (1 to 16777214), or 0 if date is invalid or unknown
- * @note The date must be specified in Coordinated Universal Time (UTC)
- */
-DateUTC::DateUTC(uint16_t year, uint8_t month, uint8_t day) {
-  // Initialize to 0 (unknown)
-  days_since_epoch = 0;
-  
-  // Validate input
-  if (year < 1970 || month < 1 || month > 12 || day < 1 || day > 31) {
-    return;
-  }
-  
-  const uint8_t days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-  uint32_t days = 0;
-  
-  // Add days for years since epoch
-  for (uint16_t y = 1970; y < year; y++) {
-    days += 365 + (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0) ? 1 : 0);
-  }
-  
-  // Add days for months in current year
-  for (uint8_t m = 1; m < month; m++) {
-    days += days_in_month[m - 1];
-    // Add leap day if February in leap year
-    if (m == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
-      days += 1;
-    }
-  }
-  
-  // Add days in current month
-  days += day - 1;
-  
-  // Validate result is within uint24 range
-  if (days > 16777214) {
-    return;
-  }
-  
-  days_since_epoch = days;
-}
-
-/**
  * @brief Construct a BTDevInf instance
  * @param server A pointer to the server instance this Device Information Service will use
  * @note This service exposes manufacturer and/or vendor information about a device.
