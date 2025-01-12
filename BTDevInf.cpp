@@ -265,7 +265,6 @@ bool BTDevInf::setIEEERegulatoryCertificationDataList(const uint8_t* data, size_
  * @note This characteristic is a set of values that is used to identify all devices of a given type/model/version.
  * @note ### Vendor ID Source field:
  * @note The Vendor ID Source field designates which organization assigned the value used in the Vendor ID field value.
- * @note - 0: Reserved for future use
  * @note - 0x01: Assigned Company Identifier value from the Bluetooth SIG Assigned Numbers https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Assigned_Numbers/out/en/Assigned_Numbers.pdf#page=213&zoom=100,96,77
  * @note - 0x02: USB Implementer's Forum assigned Vendor ID value
  * @note - 0x00, 0x03 to 0xFF: Reserved for future use
