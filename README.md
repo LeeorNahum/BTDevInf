@@ -58,9 +58,6 @@ The [AllDeviceInfo](examples/AllDeviceInfo/AllDeviceInfo.ino) example demonstrat
 - Manufacturer Name
 - IEEE Regulatory Certification Data List
 - PnP ID
-- Country Code
-- Date of Manufacture
-- Global Trade Item Number
 - UDI for Medical Devices
 
 ### Integration Example
@@ -80,9 +77,6 @@ The Device Information Service includes the following characteristics:
 - Manufacturer Name String (0x2A29)
 - IEEE 11073-20601 Regulatory Certification Data List (0x2A2A)
 - PnP ID (0x2A50)
-- Country Code (0x2AEC)
-- Date of Manufacture (0x2AED)
-- Global Trade Item Number (0x2AFA)
 - UDI for Medical Devices (0x2BFF)
 
 ## Security

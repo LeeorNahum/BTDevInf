@@ -65,9 +65,6 @@ BTDevInf::BTDevInf(NimBLEServer* server) {
   manufacturer_name_string_characteristic = nullptr;
   ieee_regulatory_certification_data_list_characteristic = nullptr;
   pnp_id_characteristic = nullptr;
-  country_code_characteristic = nullptr;
-  date_of_manufacture_characteristic = nullptr;
-  global_trade_item_number_characteristic = nullptr;
   udi_for_medical_devices_characteristic = nullptr;
 }
 
@@ -319,7 +316,7 @@ bool BTDevInf::setIEEERegulatoryCertificationDataList(const uint8_t* data, size_
  * @note - 0x00, 0x03 to 0xFF: Reserved for future use
  * @note ### Vendor ID field
  * @note The Vendor ID field is intended to uniquely identify the vendor of the device. This field is used in conjunction with Vendor ID Source field, which determines which organization assigned the Vendor ID field value.
- * @note Note: The Bluetooth Special Interest Group assigns Device ID Vendor ID, and the USB Implementer’s Forum assigns Vendor IDs, either of which can be used for the Vendor ID field value. Device providers should procure the Vendor ID from the USB Implementer’s Forum or the Company Identifier from the Bluetooth SIG.
+ * @note Note: The Bluetooth Special Interest Group assigns Device ID Vendor ID, and the USB Implementer’s Forum assigns Vendor IDs, either of which can be used for the Vendor ID field value. Device providers should procure the Vendor ID from the USB Implementer's Forum or the Company Identifier from the Bluetooth SIG.
  * @note ### Product ID field
  * @note The Product ID field is intended to distinguish between different products made by the vendor identified with the Vendor ID field.
  * @note The vendors themselves manage Product ID field values.
@@ -341,112 +338,16 @@ bool BTDevInf::setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t p
     }
   }
   
-  uint8_t pnp[] = {vendor_id_source, vendor_id & 0xFF, (vendor_id >> 8) & 0xFF, product_id & 0xFF, (product_id >> 8) & 0xFF, product_version & 0xFF, (product_version >> 8) & 0xFF};
+  uint8_t pnp[] = {
+    vendor_id_source,
+    static_cast<uint8_t>(vendor_id & 0xFF),
+    static_cast<uint8_t>((vendor_id >> 8) & 0xFF),
+    static_cast<uint8_t>(product_id & 0xFF),
+    static_cast<uint8_t>((product_id >> 8) & 0xFF),
+    static_cast<uint8_t>(product_version & 0xFF),
+    static_cast<uint8_t>((product_version >> 8) & 0xFF)
+  };
   pnp_id_characteristic->setValue(pnp, sizeof(pnp));
-  
-  return true;
-}
-
-/**
- * @brief Set country code
- * @param country_code ISO 3166-1 numeric M49 Country code
- * @return true if successful, false if service doesn't exist
- * @note This characteristic represents the country where the device was manufactured
- * @note The codes in ISO 3166 are available on the ISO website: https://www.iso.org/obp/ui/#search
- * @note Examples: 840 (USA), 124 (Canada), 484 (Mexico), etc.
- */
-bool BTDevInf::setCountryCode(uint16_t country_code) {
-  if (device_info_service == nullptr) return false;
-  
-  if (country_code_characteristic == nullptr) {
-    country_code_characteristic = device_info_service->getCharacteristic(COUNTRY_CODE_CHARACTERISTIC_UUID);
-    if (country_code_characteristic == nullptr) {
-      country_code_characteristic = device_info_service->createCharacteristic(
-        COUNTRY_CODE_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ
-      );
-      setupDescriptors(country_code_characteristic, "Country Code", NimBLE2904::FORMAT_UINT16, 0, 0, 1, 0);
-    }
-  }
-  
-  uint8_t buffer[2];
-  buffer[0] = country_code & 0xFF;
-  buffer[1] = (country_code >> 8) & 0xFF;
-  country_code_characteristic->setValue(buffer, sizeof(buffer));
-  
-  return true;
-}
-
-/**
- * @brief Set date of manufacture
- * @param days_since_epoch Days elapsed since the Epoch (Jan 1, 1970) in UTC
- * @return true if successful, false if service doesn't exist
- * @note This characteristic represents the manufacturing date for the device.
- * @note Unit is a day with a resolution of 1
- * @note Minimum: 1, Maximum: 16777214
- * @note A value of 0x000000 represents "value is not known"
- */
-bool BTDevInf::setDateOfManufacture(uint32_t days_since_epoch) {
-  if (device_info_service == nullptr) return false;
-  
-  if (date_of_manufacture_characteristic == nullptr) {
-    date_of_manufacture_characteristic = device_info_service->getCharacteristic(DATE_UTC_CHARACTERISTIC_UUID);
-    if (date_of_manufacture_characteristic == nullptr) {
-      date_of_manufacture_characteristic = device_info_service->createCharacteristic(
-        DATE_UTC_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ
-      );
-      setupDescriptors(date_of_manufacture_characteristic, "Date of Manufacture", NimBLE2904::FORMAT_UINT24, 0, 0x2762, 1, 0);
-    }
-  }
-  
-  // Convert to uint24 (3 octets)
-  uint8_t buffer[3];
-  
-  // Handle unknown or invalid value
-  if (days_since_epoch == 0 || days_since_epoch > 16777214) {
-    buffer[0] = buffer[1] = buffer[2] = 0;
-  }
-  else {
-    buffer[0] = (days_since_epoch >> 16) & 0xFF;
-    buffer[1] = (days_since_epoch >> 8) & 0xFF;
-    buffer[2] = days_since_epoch & 0xFF;
-  }
-  
-  date_of_manufacture_characteristic->setValue(buffer, sizeof(buffer));
-  
-  return true;
-}
-
-/**
- * @brief Set Global Trade Item Number
- * @param item_number An identifier for trade items, defined by GS1
- * @return true if successful, false if service doesn't exist
- * @note This characteristic represents a 14-digit Global Trade Item Number, which is typically used in product barcodes.
- */
-bool BTDevInf::setGlobalTradeItemNumber(uint64_t item_number) {
-  if (device_info_service == nullptr) return false;
-  
-  if (global_trade_item_number_characteristic == nullptr) {
-    global_trade_item_number_characteristic = device_info_service->getCharacteristic(GLOBAL_TRADE_ITEM_NUMBER_CHARACTERISTIC_UUID);
-    if (global_trade_item_number_characteristic == nullptr) {
-      global_trade_item_number_characteristic = device_info_service->createCharacteristic(
-        GLOBAL_TRADE_ITEM_NUMBER_CHARACTERISTIC_UUID,
-        NIMBLE_PROPERTY::READ
-      );
-      setupDescriptors(global_trade_item_number_characteristic, "Global Trade Item Number", NimBLE2904::FORMAT_UINT48, 0, 0, 1, 0);
-    }
-  }
-  
-  uint8_t buffer[6];
-  buffer[0] = (item_number >> 40) & 0xFF;
-  buffer[1] = (item_number >> 32) & 0xFF;
-  buffer[2] = (item_number >> 24) & 0xFF;
-  buffer[3] = (item_number >> 16) & 0xFF;
-  buffer[4] = (item_number >> 8) & 0xFF;
-  buffer[5] = item_number & 0xFF;
-  
-  global_trade_item_number_characteristic->setValue(buffer, sizeof(buffer));
   
   return true;
 }

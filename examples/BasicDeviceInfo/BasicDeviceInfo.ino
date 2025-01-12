@@ -20,7 +20,6 @@ void setup() {
   
   // Set various device information strings
   devInfo.setFirmwareRevisionString("1.0.0");
-  devInfo.setGlobalTradeItemNumber(123456789012);  // Up to 48-bit number
   devInfo.setHardwareRevisionString("Rev A");
   devInfo.setManufacturerNameString("Example Corp");
   devInfo.setModelNumberString("EX-1000");

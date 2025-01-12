@@ -14,18 +14,7 @@ const NimBLEUUID SOFTWARE_REVISION_STRING_CHARACTERISTIC_UUID("2A28");
 const NimBLEUUID MANUFACTURER_NAME_STRING_CHARACTERISTIC_UUID("2A29");
 const NimBLEUUID IEEE_11073_20601_REGULATORY_CERTIFICATION_DATA_LIST_CHARACTERISTIC_UUID("2A2A");
 const NimBLEUUID PNP_ID_CHARACTERISTIC_UUID("2A50");
-const NimBLEUUID COUNTRY_CODE_CHARACTERISTIC_UUID("2AEC");
-const NimBLEUUID DATE_UTC_CHARACTERISTIC_UUID("2AED");
-const NimBLEUUID GLOBAL_TRADE_ITEM_NUMBER_CHARACTERISTIC_UUID("2AFA");
 const NimBLEUUID UDI_FOR_MEDICAL_DEVICES_CHARACTERISTIC_UUID("2BFF");
-
-class DateUTC {
-  public:
-    DateUTC(uint16_t year, uint8_t month, uint8_t day);
-    operator uint32_t() const { return days_since_epoch; }
-  private:
-    uint32_t days_since_epoch;
-};
 
 /**
  * @brief Device Information Service class
@@ -47,9 +36,6 @@ class BTDevInf {
     bool setManufacturerNameString(const std::string& manufacturer_name_string);
     bool setIEEERegulatoryCertificationDataList(const uint8_t* data, size_t length);
     bool setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t product_id, uint16_t product_version);
-    bool setCountryCode(uint16_t country_code);
-    bool setDateOfManufacture(uint32_t days_since_epoch);
-    bool setGlobalTradeItemNumber(uint64_t item_number);
     bool setUDIForMedicalDevices(const std::string& udi);
     
     NimBLEService* getService() { return device_info_service; }
@@ -63,9 +49,6 @@ class BTDevInf {
     NimBLECharacteristic* getManufacturerNameCharacteristic() { return manufacturer_name_string_characteristic; }
     NimBLECharacteristic* getIEEERegulatoryCertificationDataListCharacteristic() { return ieee_regulatory_certification_data_list_characteristic; }
     NimBLECharacteristic* getPnPIDCharacteristic() { return pnp_id_characteristic; }
-    NimBLECharacteristic* getCountryCodeCharacteristic() { return country_code_characteristic; }
-    NimBLECharacteristic* getDateOfManufactureCharacteristic() { return date_of_manufacture_characteristic; }
-    NimBLECharacteristic* getGlobalTradeItemNumberCharacteristic() { return global_trade_item_number_characteristic; }
     NimBLECharacteristic* getUDIForMedicalDevicesCharacteristic() { return udi_for_medical_devices_characteristic; }
     
   private:
@@ -80,9 +63,6 @@ class BTDevInf {
     NimBLECharacteristic* manufacturer_name_string_characteristic;
     NimBLECharacteristic* ieee_regulatory_certification_data_list_characteristic;
     NimBLECharacteristic* pnp_id_characteristic;
-    NimBLECharacteristic* country_code_characteristic;
-    NimBLECharacteristic* date_of_manufacture_characteristic;
-    NimBLECharacteristic* global_trade_item_number_characteristic;
     NimBLECharacteristic* udi_for_medical_devices_characteristic;
     
     void setupDescriptors(NimBLECharacteristic* characteristic, const char* user_description, uint8_t format, int8_t exponent, uint16_t unit, uint8_t namespace_value, uint16_t description);

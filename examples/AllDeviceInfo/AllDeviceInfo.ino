@@ -37,18 +37,6 @@ void setup() {
   // product_version: JJ.M.N format (0x0100 for 1.0.0)
   devInfo.setPnPID(0x02, 0x0483, 0x5740, 0x0100);
   
-  // Set country code (840 = USA)
-  // For a list of codes, see: https://www.iso.org/obp/ui/#search
-  devInfo.setCountryCode(840);
-  
-  // Set date of manufacture (UTC)
-  // Use DateUTC helper class to convert calendar date to days since epoch
-  devInfo.setDateOfManufacture(DateUTC(2025, 1, 12));
-  
-  // Set Global Trade Item Number (GTIN)
-  // 14-digit number used in barcodes
-  devInfo.setGlobalTradeItemNumber(123456789012);
-  
   // Set UDI for Medical Devices (requires authentication to read)
   // Unique Device Identifier as assigned to medical devices
   devInfo.setUDIForMedicalDevices("(01)12345678901234");
