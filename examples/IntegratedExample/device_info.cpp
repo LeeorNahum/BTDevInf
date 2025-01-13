@@ -5,11 +5,11 @@ void setupDeviceInformation(NimBLEServer* server) {
   BTDevInf devInfo(server);
   
   // Set basic device information
-  devInfo.setManufacturerNameString("My Company");
   devInfo.setModelNumberString("MODEL-1");
+  devInfo.setSerialNumberString("SN0123456789");
   devInfo.setFirmwareRevisionString("1.0.0");
   devInfo.setHardwareRevisionString("Rev A");
-  devInfo.setSerialNumberString("SN0123456789");
+  devInfo.setManufacturerNameString("My Company");
   
   // Start the service
   devInfo.startService();
