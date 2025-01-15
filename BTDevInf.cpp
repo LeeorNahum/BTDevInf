@@ -67,7 +67,7 @@ bool BTDevInf::setSystemID(const uint8_t* system_id, size_t length) {
         SYSTEM_ID_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
       );
-      setupDescriptors(system_id_characteristic, "System ID", NimBLE2904::FORMAT_OPAQUE, 0, 0, 1, 0);
+      setupDescriptors(system_id_characteristic, "System ID", NimBLE2904::FORMAT_OPAQUE, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -92,7 +92,7 @@ bool BTDevInf::setModelNumberString(const std::string& model_number_string) {
         MODEL_NUMBER_STRING_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(model_number_string_characteristic, "Model Number", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(model_number_string_characteristic, "Model Number", NimBLE2904::FORMAT_UTF8, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -117,7 +117,7 @@ bool BTDevInf::setSerialNumberString(const std::string& serial_number_string) {
         SERIAL_NUMBER_STRING_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
       );
-      setupDescriptors(serial_number_string_characteristic, "Serial Number", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(serial_number_string_characteristic, "Serial Number", NimBLE2904::FORMAT_UTF8, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -142,7 +142,7 @@ bool BTDevInf::setFirmwareRevisionString(const std::string& firmware_revision_st
         FIRMWARE_REVISION_STRING_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(firmware_revision_string_characteristic, "Firmware Revision", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(firmware_revision_string_characteristic, "Firmware Revision", NimBLE2904::FORMAT_UTF8, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -167,7 +167,7 @@ bool BTDevInf::setHardwareRevisionString(const std::string& hardware_revision_st
         HARDWARE_REVISION_STRING_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(hardware_revision_string_characteristic, "Hardware Revision", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(hardware_revision_string_characteristic, "Hardware Revision", NimBLE2904::FORMAT_UTF8, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -192,7 +192,7 @@ bool BTDevInf::setSoftwareRevisionString(const std::string& software_revision_st
         SOFTWARE_REVISION_STRING_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(software_revision_string_characteristic, "Software Revision", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(software_revision_string_characteristic, "Software Revision", NimBLE2904::FORMAT_UTF8, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -217,7 +217,7 @@ bool BTDevInf::setManufacturerNameString(const std::string& manufacturer_name_st
         MANUFACTURER_NAME_STRING_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(manufacturer_name_string_characteristic, "Manufacturer Name", NimBLE2904::FORMAT_UTF8, 0, 0, 1, 0);
+      setupDescriptors(manufacturer_name_string_characteristic, "Manufacturer Name", NimBLE2904::FORMAT_UTF8, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -246,7 +246,7 @@ bool BTDevInf::setIEEERegulatoryCertificationDataList(const uint8_t* data, size_
         IEEE_11073_20601_REGULATORY_CERTIFICATION_DATA_LIST_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(ieee_regulatory_certification_data_list_characteristic, "IEEE Regulatory Certification", NimBLE2904::FORMAT_IEEE20601, 0, 0, 1, 0);
+      setupDescriptors(ieee_regulatory_certification_data_list_characteristic, "IEEE Regulatory Certification", NimBLE2904::FORMAT_IEEE20601, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -288,7 +288,7 @@ bool BTDevInf::setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t p
         PNP_ID_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ
       );
-      setupDescriptors(pnp_id_characteristic, "PnP ID", NimBLE2904::FORMAT_OPAQUE, 0, 0, 1, 0);
+      setupDescriptors(pnp_id_characteristic, "PnP ID", NimBLE2904::FORMAT_OPAQUE, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
@@ -324,7 +324,7 @@ bool BTDevInf::setUDIForMedicalDevices(const uint8_t* udi, size_t length) {
         UDI_FOR_MEDICAL_DEVICES_CHARACTERISTIC_UUID,
         NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::READ_AUTHEN
       );
-      setupDescriptors(udi_for_medical_devices_characteristic, "UDI for Medical Devices", NimBLE2904::FORMAT_OPAQUE, 0, 0, 1, 0);
+      setupDescriptors(udi_for_medical_devices_characteristic, "UDI for Medical Devices", NimBLE2904::FORMAT_OPAQUE, 0x00, 0x0000, 0x01, 0x0000);
     }
   }
   
