@@ -47,18 +47,7 @@ void setup() {
 
 ### Complete Device Information
 
-The [AllDeviceInfo](examples/AllDeviceInfo/AllDeviceInfo.ino) example demonstrates all available characteristics, including:
-
-- System ID
-- Model Number
-- Serial Number
-- Firmware Revision
-- Hardware Revision
-- Software Revision
-- Manufacturer Name
-- IEEE Regulatory Certification Data List
-- PnP ID
-- UDI for Medical Devices
+The [AllDeviceInfo](examples/AllDeviceInfo/AllDeviceInfo.ino) example demonstrates all available characteristics.
 
 ### Integration Example
 
@@ -66,25 +55,27 @@ The [IntegratedExample](examples/IntegratedExample/IntegratedExample.ino) shows 
 
 ## Characteristics
 
-The Device Information Service includes the following characteristics:
+The Device Information Service (UUID: 180A) contains the following characteristics:
 
-- System ID (0x2A23)
-- Model Number String (0x2A24)
-- Serial Number String (0x2A25)
-- Firmware Revision String (0x2A26)
-- Hardware Revision String (0x2A27)
-- Software Revision String (0x2A28)
-- Manufacturer Name String (0x2A29)
-- IEEE 11073-20601 Regulatory Certification Data List (0x2A2A)
-- PnP ID (0x2A50)
-- UDI for Medical Devices (0x2BFF)
+| Characteristic | UUID | Properties | Description |
+|---------------|------|------------|-------------|
+| System ID | 2A23 | Read, Auth | Extended unique identifier (EUI) of the system |
+| Model Number String | 2A24 | Read | Model number assigned by device vendor |
+| Serial Number String | 2A25 | Read, Auth | Serial number for a particular device instance |
+| Firmware Revision String | 2A26 | Read | Revision for the firmware within the device |
+| Hardware Revision String | 2A27 | Read | Revision for the hardware within the device |
+| Software Revision String | 2A28 | Read | Revision for the software within the device |
+| Manufacturer Name String | 2A29 | Read | Name of the manufacturer of the device |
+| IEEE Regulatory Certification | 2A2A | Read | IEEE 11073-20601 regulatory certification data list |
+| PnP ID | 2A50 | Read | Vendor ID Source, Vendor ID, Product ID, and Product Version |
+| UDI for Medical Devices | 2BFF | Read, Auth | Unique Device Identifier for medical devices |
 
 ## Security
 
 Some characteristics contain personally identifiable information (PII) and require authentication to read:
 
 - System ID
-- Serial Number
+- Serial Number String
 - UDI for Medical Devices
 
 ## Documentation
@@ -92,5 +83,4 @@ Some characteristics contain personally identifiable information (PII) and requi
 For more information about the Device Information Service, see:
 
 - [Device Information Service Specification](https://www.bluetooth.com/specifications/specs/device-information-service/)
-
 - [Device Properties Specification](https://btprodspecificationrefs.blob.core.windows.net/device-properties/Device_Properties.pdf)

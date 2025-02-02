@@ -41,12 +41,12 @@ class BTDevInf {
     NimBLEService* getService() { return device_info_service; }
     
     NimBLECharacteristic* getSystemIDCharacteristic() { return system_id_characteristic; }
-    NimBLECharacteristic* getModelNumberCharacteristic() { return model_number_string_characteristic; }
-    NimBLECharacteristic* getSerialNumberCharacteristic() { return serial_number_string_characteristic; }
-    NimBLECharacteristic* getFirmwareRevisionCharacteristic() { return firmware_revision_string_characteristic; }
-    NimBLECharacteristic* getHardwareRevisionCharacteristic() { return hardware_revision_string_characteristic; }
-    NimBLECharacteristic* getSoftwareRevisionCharacteristic() { return software_revision_string_characteristic; }
-    NimBLECharacteristic* getManufacturerNameCharacteristic() { return manufacturer_name_string_characteristic; }
+    NimBLECharacteristic* getModelNumberStringCharacteristic() { return model_number_string_characteristic; }
+    NimBLECharacteristic* getSerialNumberStringCharacteristic() { return serial_number_string_characteristic; }
+    NimBLECharacteristic* getFirmwareRevisionStringCharacteristic() { return firmware_revision_string_characteristic; }
+    NimBLECharacteristic* getHardwareRevisionStringCharacteristic() { return hardware_revision_string_characteristic; }
+    NimBLECharacteristic* getSoftwareRevisionStringCharacteristic() { return software_revision_string_characteristic; }
+    NimBLECharacteristic* getManufacturerNameStringCharacteristic() { return manufacturer_name_string_characteristic; }
     NimBLECharacteristic* getIEEERegulatoryCertificationDataListCharacteristic() { return ieee_regulatory_certification_data_list_characteristic; }
     NimBLECharacteristic* getPnPIDCharacteristic() { return pnp_id_characteristic; }
     NimBLECharacteristic* getUDIForMedicalDevicesCharacteristic() { return udi_for_medical_devices_characteristic; }
