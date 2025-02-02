@@ -12,19 +12,20 @@ void setup() {
   // Create Device Information Service
   BTDevInf devInfo(NimBLEDevice::createServer());
   
-  // Set country code (840 = USA)
-  devInfo.setCountryCode(840);
-  
-  // Set date of manufacture (UTC)
-  devInfo.setDateOfManufacture(DateUTC(2024, 1, 9));
-  
   // Set various device information strings
-  devInfo.setFirmwareRevisionString("1.0.0");
-  devInfo.setHardwareRevisionString("Rev A");
-  devInfo.setManufacturerNameString("Example Corp");
   devInfo.setModelNumberString("EX-1000");
   devInfo.setSerialNumberString("SN123456789");
+  devInfo.setFirmwareRevisionString("1.0.0");
+  devInfo.setHardwareRevisionString("Rev A");
   devInfo.setSoftwareRevisionString("1.0.0");
+  devInfo.setManufacturerNameString("Example Corp");
+  
+  // Set PnP ID
+  // vendor_id_source: 0x01 for Bluetooth SIG, 0x02 for USB Implementer's Forum
+  // vendor_id: Company identifier
+  // product_id: Vendor-assigned product ID
+  // product_version: JJ.M.N format (0x0100 for 1.0.0)
+  devInfo.setPnPID(0x02, 0x303A, 0x1001, 0x0100);
   
   // Start the service
   devInfo.startService();
