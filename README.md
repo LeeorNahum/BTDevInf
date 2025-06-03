@@ -1,4 +1,4 @@
-# BTDevInf
+# BTDevInf - Bluetooth Device Information Library
 
 BTDevInf is a library for ESP32 that implements the Bluetooth Device Information Service. It provides a simple interface to expose manufacturer and vendor information about your device over BLE, following the official Bluetooth specification. The library is based on the NimBLE-Arduino library.
 

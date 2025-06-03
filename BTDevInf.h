@@ -66,6 +66,17 @@ class BTDevInf {
     NimBLECharacteristic* udi_for_medical_devices_characteristic;
     
     void setupDescriptors(NimBLECharacteristic* characteristic, const char* user_description, uint8_t format, int8_t exponent, uint16_t unit, uint8_t namespace_value, uint16_t description);
+    
+    void createSystemIDCharacteristic();
+    void createModelNumberStringCharacteristic();
+    void createSerialNumberStringCharacteristic();
+    void createFirmwareRevisionStringCharacteristic();
+    void createHardwareRevisionStringCharacteristic();
+    void createSoftwareRevisionStringCharacteristic();
+    void createManufacturerNameStringCharacteristic();
+    void createIEEERegulatoryCertificationDataListCharacteristic();
+    void createPnPIDCharacteristic();
+    void createUDIForMedicalDevicesCharacteristic();
 };
 
 #endif // BTDEVINF_H
