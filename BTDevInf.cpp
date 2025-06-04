@@ -34,17 +34,6 @@ BTDevInf::BTDevInf(NimBLEServer* server) {
  */
 bool BTDevInf::startService() {
   if (device_info_service) {
-    createSystemIDCharacteristic();
-    createModelNumberStringCharacteristic();
-    createSerialNumberStringCharacteristic();
-    createFirmwareRevisionStringCharacteristic();
-    createHardwareRevisionStringCharacteristic();
-    createSoftwareRevisionStringCharacteristic();
-    createManufacturerNameStringCharacteristic();
-    createIEEERegulatoryCertificationDataListCharacteristic();
-    createPnPIDCharacteristic();
-    createUDIForMedicalDevicesCharacteristic();
-    
     return device_info_service->start();
   }
   return false;
@@ -207,7 +196,8 @@ void BTDevInf::createUDIForMedicalDevicesCharacteristic() {
  */
 bool BTDevInf::setSystemID(const uint8_t* system_id, size_t length) {
   if (device_info_service == nullptr) return false;
-  if (system_id_characteristic == nullptr) return false;
+  
+  createSystemIDCharacteristic();
   
   system_id_characteristic->setValue(system_id, length);
   
@@ -222,7 +212,8 @@ bool BTDevInf::setSystemID(const uint8_t* system_id, size_t length) {
  */
 bool BTDevInf::setModelNumberString(const std::string& model_number_string) {
   if (device_info_service == nullptr) return false;
-  if (model_number_string_characteristic == nullptr) return false;
+  
+  createModelNumberStringCharacteristic();
   
   model_number_string_characteristic->setValue(model_number_string);
   
@@ -237,7 +228,8 @@ bool BTDevInf::setModelNumberString(const std::string& model_number_string) {
  */
 bool BTDevInf::setSerialNumberString(const std::string& serial_number_string) {
   if (device_info_service == nullptr) return false;
-  if (serial_number_string_characteristic == nullptr) return false;
+  
+  createSerialNumberStringCharacteristic();
   
   serial_number_string_characteristic->setValue(serial_number_string);
   
@@ -252,7 +244,8 @@ bool BTDevInf::setSerialNumberString(const std::string& serial_number_string) {
  */
 bool BTDevInf::setFirmwareRevisionString(const std::string& firmware_revision_string) {
   if (device_info_service == nullptr) return false;
-  if (firmware_revision_string_characteristic == nullptr) return false;
+  
+  createFirmwareRevisionStringCharacteristic();
   
   firmware_revision_string_characteristic->setValue(firmware_revision_string);
   
@@ -267,7 +260,8 @@ bool BTDevInf::setFirmwareRevisionString(const std::string& firmware_revision_st
  */
 bool BTDevInf::setHardwareRevisionString(const std::string& hardware_revision_string) {
   if (device_info_service == nullptr) return false;
-  if (hardware_revision_string_characteristic == nullptr) return false;
+  
+  createHardwareRevisionStringCharacteristic();
   
   hardware_revision_string_characteristic->setValue(hardware_revision_string);
   
@@ -282,7 +276,8 @@ bool BTDevInf::setHardwareRevisionString(const std::string& hardware_revision_st
  */
 bool BTDevInf::setSoftwareRevisionString(const std::string& software_revision_string) {
   if (device_info_service == nullptr) return false;
-  if (software_revision_string_characteristic == nullptr) return false;
+  
+  createSoftwareRevisionStringCharacteristic();
   
   software_revision_string_characteristic->setValue(software_revision_string);
   
@@ -297,7 +292,8 @@ bool BTDevInf::setSoftwareRevisionString(const std::string& software_revision_st
  */
 bool BTDevInf::setManufacturerNameString(const std::string& manufacturer_name_string) {
   if (device_info_service == nullptr) return false;
-  if (manufacturer_name_string_characteristic == nullptr) return false;
+  
+  createManufacturerNameStringCharacteristic();
   
   manufacturer_name_string_characteristic->setValue(manufacturer_name_string);
   
@@ -316,7 +312,8 @@ bool BTDevInf::setManufacturerNameString(const std::string& manufacturer_name_st
  */
 bool BTDevInf::setIEEERegulatoryCertificationDataList(const uint8_t* data, size_t length) {
   if (device_info_service == nullptr) return false;
-  if (ieee_regulatory_certification_data_list_characteristic == nullptr) return false;
+  
+  createIEEERegulatoryCertificationDataListCharacteristic();
   
   ieee_regulatory_certification_data_list_characteristic->setValue(data, length);
   
@@ -348,7 +345,8 @@ bool BTDevInf::setIEEERegulatoryCertificationDataList(const uint8_t* data, size_
  */
 bool BTDevInf::setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t product_id, uint16_t product_version) {
   if (device_info_service == nullptr) return false;
-  if (pnp_id_characteristic == nullptr) return false;
+  
+  createPnPIDCharacteristic();
   
   uint8_t pnp[] = {
     vendor_id_source,
@@ -374,7 +372,8 @@ bool BTDevInf::setPnPID(uint8_t vendor_id_source, uint16_t vendor_id, uint16_t p
  */
 bool BTDevInf::setUDIForMedicalDevices(const uint8_t* udi, size_t length) {
   if (device_info_service == nullptr) return false;
-  if (udi_for_medical_devices_characteristic == nullptr) return false;
+  
+  createUDIForMedicalDevicesCharacteristic();
   
   udi_for_medical_devices_characteristic->setValue(udi, length);
   

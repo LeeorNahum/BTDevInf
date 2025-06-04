@@ -2,6 +2,14 @@
 
 BTDevInf is a library for ESP32 that implements the Bluetooth Device Information Service. It provides a simple interface to expose manufacturer and vendor information about your device over BLE, following the official Bluetooth specification. The library is based on the NimBLE-Arduino library.
 
+## Features
+
+- **BLE Standard Compliant**: Uses official Bluetooth Device Information Service UUIDs and follows the specification
+- **Comprehensive Device Info**: Supports all standard device information characteristics including system ID, model number, serial number, firmware/hardware/software versions, and more
+- **Lazy Characteristic Creation**: Characteristics are only created when their corresponding setter methods are called, improving efficiency
+- **Security Support**: Some characteristics require authentication for enhanced security
+- **Easy Integration**: Simple API that works seamlessly with existing NimBLE projects
+
 ## Installation
 
 ### Arduino IDE
@@ -44,6 +52,8 @@ void setup() {
     NimBLEDevice::getAdvertising()->start();
 }
 ```
+
+**Note**: Characteristics are created automatically when you call the corresponding setter methods. Only the characteristics you actually use will be created, making the library more efficient.
 
 ### Complete Device Information
 
