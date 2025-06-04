@@ -1,5 +1,5 @@
 #include <NimBLEDevice.h>
-#include "device_info.h"
+#include "ble_device_information_service.h"
 
 // Example BLE service and characteristic
 const NimBLEUUID SERVICE_UUID        ("686f2d92-3977-41da-9670-90a68d37e560");
@@ -26,8 +26,8 @@ void setup() {
   characteristic->setValue("Hello World");
   mainService->start();
   
-  // Setup device information in a separate file
-  setupDeviceInformation(server);
+  // Setup device information service
+  bleStartDeviceInformationService();
   
   // Start advertising
   NimBLEDevice::getAdvertising()->start();
